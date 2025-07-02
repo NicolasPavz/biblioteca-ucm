@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/authService";
 import { jwtDecode } from "jwt-decode";
+import Header from "../components/header";
 import "./LoginPage.css";
 
 const LoginPage = () => {
@@ -42,29 +43,40 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-wrapper">
-      <div className="login-container">
-        <h2>Iniciar sesión</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            name="email"
-            placeholder="Correo"
-            value={form.email}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Contraseña"
-            value={form.password}
-            onChange={handleChange}
-            required
-          />
-          <button type="submit">Ingresar</button>
-        </form>
-        {error && <p className="login-error">{error}</p>}
+    <div>
+      <Header />
+      <div className="login-wrapper">
+        <div className="login-container">
+          <h2>Iniciar sesión</h2>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="email"
+              name="email"
+              placeholder="Correo"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Contraseña"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+            <button type="submit">Ingresar</button>
+          </form>
+
+          <button
+            className="register-button"
+            onClick={() => navigate("/auth/register")}
+          >
+            ¿No tienes cuenta? Regístrate
+          </button>
+
+          {error && <p className="login-error">{error}</p>}
+        </div>
       </div>
     </div>
   );
