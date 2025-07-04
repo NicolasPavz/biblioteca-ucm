@@ -45,9 +45,9 @@ export const newBook = async (book) => {
     throw error;
   }
 }
-export const newCopy = async (copy) => {
+export const newCopy = async (bookFk) => {
   try {
-    const response = await axiosInstance.post(`${API}/newcopy`, copy);
+    const response = await axiosInstance.post(`${API}/newcopy`, {bookFk});
     return response.data;
   } catch (error) {
     console.error("Error creando nueva copia del libro", error);
