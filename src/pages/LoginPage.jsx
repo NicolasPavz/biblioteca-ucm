@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../services/authService";
 import { jwtDecode } from "jwt-decode";
 import Header from "../components/header";
-import "./LoginPage.css";
+import "../styles/LoginPage.css";
 
 const LoginPage = () => {
   const [form, setForm] = useState({ email: "", password: "" });

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getAllBooks, searchBookByType} from "../services/bookService";
+import { getAllBooks, searchBookByType } from "../services/bookService";
 import HeaderLector from "../components/HeaderLector";
-import "./HomePage.css";
+import "../styles/HomePage.css";
 
 const LectorHomePage = () => {
   const [books, setBooks] = useState([]);
@@ -38,7 +38,7 @@ const LectorHomePage = () => {
   const handleClear = async () => {
     setType("");
     const response = await getAllBooks();
-    setBooks(response);
+    setBooks(response.data);
   };
 
   return (
@@ -53,7 +53,7 @@ const LectorHomePage = () => {
             value={type}
             onChange={(e) => setType(e.target.value)}
             className="search-bar"
-            onKeyDown={(e) => e.key === "Enter" && handleTypeSearch()}  
+            onKeyDown={(e) => e.key === "Enter" && handleTypeSearch()}
           />
           <button onClick={handleTypeSearch} className="search-button">
             Buscar por tipo

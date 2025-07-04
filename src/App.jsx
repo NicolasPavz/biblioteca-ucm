@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
 import MultasPage from "./pages/MultasPage";
 import PrestamosPage from "./pages/PrestamosPage";
+import BookPage from "./pages/BookPage";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
       />
       <Route path="/prestamos" element={<PrestamosPage />} />
       <Route path="/multas" element={<MultasPage />} />
+      <Route path="/book" element={<BookPage />} />
     </Routes>
   );
 }

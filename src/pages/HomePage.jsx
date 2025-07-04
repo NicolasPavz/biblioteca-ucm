@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAllBooks, searchBookByType } from "../services/bookService";
 import Header from "../components/header";
-import "./HomePage.css";
+import "../styles/HomePage.css";
 
 const HomePage = () => {
   const [books, setBooks] = useState([]);
@@ -52,7 +52,7 @@ const HomePage = () => {
             value={type}
             onChange={(e) => setType(e.target.value)}
             className="search-bar"
-            onKeyDown={(e) => e.key === "Enter" && handleTypeSearch()}  
+            onKeyDown={(e) => e.key === "Enter" && handleTypeSearch()}
           />
           <button onClick={handleTypeSearch} className="search-button">
             Buscar por tipo

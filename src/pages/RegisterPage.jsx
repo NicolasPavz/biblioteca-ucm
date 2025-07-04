@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../services/authService";
 import Header from "../components/header";
-import "./RegisterPage.css";
+import "../styles/RegisterPage.css";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -37,48 +37,48 @@ const RegisterPage = () => {
   return (
     <div>
       <Header />
-    <div className="register-wrapper">
-      <div className="register-container">
-        <h2>Registro de Usuario</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Nombre"
-            value={form.name}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="lastName"
-            placeholder="Apellido"
-            value={form.lastName}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Correo electrónico"
-            value={form.email}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Contraseña"
-            value={form.password}
-            onChange={handleChange}
-            required
-          />
-          <button type="submit">Registrarse</button>
-        </form>
-        {error && <p className="register-error">{error}</p>}
-        {success && <p className="register-success">{success}</p>}
+      <div className="register-wrapper">
+        <div className="register-container">
+          <h2>Registro de Usuario</h2>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="name"
+              placeholder="Nombre"
+              value={form.name}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Apellido"
+              value={form.lastName}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Correo electrónico"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Contraseña"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+            <button type="submit">Registrarse</button>
+          </form>
+          {error && <p className="register-error">{error}</p>}
+          {success && <p className="register-success">{success}</p>}
+        </div>
       </div>
-    </div>
     </div>
   );
 };
