@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosInstance from "./axiosConfig";
 
 const API = import.meta.env.VITE_API_URL + "/book";
 
@@ -27,7 +28,7 @@ export const searchBookByType = async (type) => {
 
 export const searchBookByTitle = async (title) => {
   try {
-    const response = await axios.get(`${API}/find/${title}`);
+    const response = await axiosInstance.get(`${API}/find/${title}`);
     return response.data;
   } catch (error) {
     console.error("Error buscando libro por título", error);
@@ -37,7 +38,7 @@ export const searchBookByTitle = async (title) => {
 
 export const newBook = async (book) => {
   try {
-    const response = await axios.post(`${API}/new`, book);
+    const response = await axiosInstance.post(`${API}/new`, book);
     return response.data;
   } catch (error) {
     console.error("Error creando nuevo libro", error);
@@ -46,7 +47,7 @@ export const newBook = async (book) => {
 }
 export const newCopy = async (copy) => {
   try {
-    const response = await axios.post(`${API}/newcopy`, copy);
+    const response = await axiosInstance.post(`${API}/newcopy`, copy);
     return response.data;
   } catch (error) {
     console.error("Error creando nueva copia del libro", error);
@@ -55,7 +56,7 @@ export const newCopy = async (copy) => {
 }
 export const getCopyByTitle = async (title) => {
   try {
-    const response = await axios.get(`${API}/copy/${title}`);
+    const response = await axiosInstance.get(`${API}/copy/${title}`);
     return response.data;
   } catch (error) {
     console.error("Error obteniendo copias del libro por título", error);

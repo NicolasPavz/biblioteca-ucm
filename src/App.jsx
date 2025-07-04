@@ -5,6 +5,8 @@ import AdminHomePage from "./pages/AdminHomePage";
 import RoleBasedRoute from "./routes/RolRoute";
 import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage";
+import MultasPage from "./pages/MultasPage";
+import PrestamosPage from "./pages/PrestamosPage";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
           </RoleBasedRoute>
         }
       />
+      <Route path="/prestamos" element={<PrestamosPage />} />
+      <Route path="/multas" element={<MultasPage />} />
     </Routes>
   );
 }
