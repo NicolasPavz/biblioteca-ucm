@@ -1,24 +1,18 @@
 import { useEffect, useState } from "react";
-import { getAllBooks } from "../services/bookService";
+import { getAllBooks, searchBookByType } from "../services/bookService";
 import Header from "../components/header";
 import "./HomePage.css";
 
 const HomePage = () => {
   const [books, setBooks] = useState([]);
-  const [allBooks, setAllBooks] = useState([]);
-  const [search, setSearch] = useState("");
+  const [type, setType] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBooks = async () => {
       try {
         const response = await getAllBooks();
-        if (response && response.length > 0) {
-          setBooks(response);
-          setAllBooks(response);
-        } else {
-          console.warn("No se encontraron libros");
-        }
+        setBooks(response);
       } catch (error) {
         console.error("Error al obtener los libros:", error);
       } finally {
@@ -29,41 +23,39 @@ const HomePage = () => {
     fetchBooks();
   }, []);
 
-  const handleSearch = () => {
-    const filtered = allBooks.filter(
-      (book) =>
-        book.title.toLowerCase().includes(search.toLowerCase()) ||
-        book.author.toLowerCase().includes(search.toLowerCase())
-    );
-    setBooks(filtered);
-  };
-
-  const handleClear = () => {
-    setSearch("");
-    setBooks(allBooks);
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
+  const handleTypeSearch = async () => {
+    if (!type.trim()) return;
+    try {
+      const result = await searchBookByType(type.trim());
+      setBooks(result);
+    } catch (error) {
+      console.error("Error al buscar por tipo:", error);
+      setBooks([]);
     }
   };
 
+  const handleClear = async () => {
+    setType("");
+    const response = await getAllBooks();
+    setBooks(response);
+  };
+
   return (
-    <div>
+    <div className="home-page">
       <Header />
       <main className="home-content">
+        <h1>Bienvenido a la Biblioteca UCM</h1>
         <div className="search-section">
           <input
             type="text"
-            placeholder="Buscar libros por título o autor..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            onKeyDown={handleKeyDown}
+            placeholder="Buscar libros por tipo..."
+            value={type}
+            onChange={(e) => setType(e.target.value)}
             className="search-bar"
+            onKeyDown={(e) => e.key === "Enter" && handleTypeSearch()}  
           />
-          <button onClick={handleSearch} className="search-button">
-            Buscar
+          <button onClick={handleTypeSearch} className="search-button">
+            Buscar por tipo
           </button>
           <button onClick={handleClear} className="clear-button">
             Limpiar
@@ -74,7 +66,7 @@ const HomePage = () => {
           <p className="loading-text">Cargando libros...</p>
         ) : (
           <div className="book-list">
-            {books.length > 0 ? (
+            {Array.isArray(books) && books.length > 0 ? (
               books.map((book) => (
                 <div key={book.id} className="book-card">
                   {book.image64 && (
@@ -96,7 +88,6 @@ const HomePage = () => {
         )}
       </main>
     </div>
-
   );
 };
 

@@ -2,6 +2,8 @@ import axios from "axios";
 
 const API = import.meta.env.VITE_API_URL + "/reader";
 
+
+// ADmin
 export const changeReaderState = async (email, state) =>{
     try {
         const response = await axios.post(`${API}/state/${email}`, { state });

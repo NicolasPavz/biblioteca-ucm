@@ -2,6 +2,7 @@ import axios from "axios";
 
 const API = import.meta.env.VITE_API_URL + "/book";
 
+//Public
 export const getAllBooks = async () => {
   try {
     const response = await axios.get(`${API}/all`);
@@ -12,21 +13,24 @@ export const getAllBooks = async () => {
   }
 }
 
-export const searchBookByTitle = async (title) => {
-  try {
-    const response = await axios.get(`${API}/find/${title}`);
-    return response.data;
-  } catch (error) {
-    console.error("Error buscando libro por título", error);
-    throw error;
-  }
-}
 export const searchBookByType = async (type) => {
   try {
     const response = await axios.get(`${API}/all/${type}`);
     return response.data;
   }catch (error) {
     console.error("Error buscando libro por tipo", error);
+    throw error;
+  }
+}
+
+//ADMIN
+
+export const searchBookByTitle = async (title) => {
+  try {
+    const response = await axios.get(`${API}/find/${title}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error buscando libro por título", error);
     throw error;
   }
 }
