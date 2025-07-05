@@ -11,3 +11,13 @@ export const getFinesByEmail = async (email) => {
     throw error;
   }
 }
+
+export const newFine = async (fine) => {
+  try {
+    const response = await axiosInstance.post(`${API}/new`, fine);
+    return response.data;
+  } catch (error) {
+    console.error("Error creando multa", error);
+    throw error;
+  }
+}

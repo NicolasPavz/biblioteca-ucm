@@ -1,0 +1,57 @@
+.centered-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.tab-button {
+  font-size: 1rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.tab-button:hover {
+  background-color: #0056b3;
+}
+
+.datos-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.datos-table {
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  width: 60%;
+}
+
+.datos-table th, .datos-table td {
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+  text-align: left;
+}
+
+.datos-table th {
+  background-color: #f4f4f4;
+  width: 30%;
+}
+
+.btn-toggle-estado {
+  padding: 0.5rem 1rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-toggle-estado:hover {
+  background-color: #218838;
+}

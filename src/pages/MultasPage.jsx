@@ -43,7 +43,7 @@ const MultasPage = () => {
                                 <tr key={f.id}>
                                     <td>${f.amount}</td>
                                     <td>{f.description}</td>
-                                    <td>{f.state ? "Pagada" : "Pendiente"}</td>
+                                    <td>{f.state ? "Pendiente" : "Pagada"}</td>
                                 </tr>
                             ))}
                         </tbody>
