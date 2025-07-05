@@ -10,7 +10,7 @@ const BookPage = () => {
         type: "",
         image64: "",
     });
-    const [mensaje, setMensaje] = useState("");
+    const [, setMensaje] = useState("");
     const [results, setResults] = useState([]);
     const [selectedBook, setSelectedBook] = useState(null);
     const [searchTitle, setSearchTitle] = useState("");

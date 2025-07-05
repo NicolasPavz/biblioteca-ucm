@@ -5,6 +5,7 @@ import HeaderLector from "../components/HeaderLector";
 
 const PrestamosPage = () => {
   const [bookings, setBookings] = useState([]);
+
   useEffect(() => {
     const fetchBookings = async () => {
       try {
@@ -32,18 +33,24 @@ const PrestamosPage = () => {
             <thead>
               <tr>
                 <th>Título</th>
+                <th>Autor</th>
+                <th>Tipo</th>
                 <th>Fecha Préstamo</th>
                 <th>Fecha Devolución</th>
-                <th>Devuelto</th>
+                <th>Estado</th>
               </tr>
             </thead>
             <tbody>
               {bookings.map((b) => (
                 <tr key={b.id}>
-                  <td>{b.copy?.book?.title || "Desconocido"}</td>
-                  <td>{b.dateBooking}</td>
-                  <td>{b.dateReturn || "Pendiente"}</td>
-                  <td>{b.state ? "Sí" : "No"}</td>
+                  <td>{b.copyBook?.book?.title}</td>
+                  <td>{b.copyBook?.book?.author}</td>
+                  <td>{b.copyBook?.book?.type}</td>
+                  <td>{new Date(b.dateBooking).toLocaleDateString()}</td>
+                  <td>{new Date(b.dateReturn).toLocaleDateString()}</td>
+                  <td style={{ color: b.state ? "green" : "gray" }}>
+                    {b.state ? "Activo" : "Devuelto"}
+                  </td>
                 </tr>
               ))}
             </tbody>

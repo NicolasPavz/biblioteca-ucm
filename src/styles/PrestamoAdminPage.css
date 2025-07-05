@@ -1,0 +1,18 @@
+.search-results ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.search-results li {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.search-results li.selected {
+  background-color: #d0f0ff;
+  font-weight: bold;
+}

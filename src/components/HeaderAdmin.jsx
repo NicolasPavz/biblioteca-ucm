@@ -16,7 +16,7 @@ const HeaderAdmin = () => {
       <nav className="nav-buttons">
         <button onClick={() => navigate("/home-admin")}>Home</button>
         <button onClick={() => navigate("/book")}>Nuevo Libro</button>
-        <button onClick={() => navigate("/admin/prestamo")}>Préstamo</button>
+        <button onClick={() => navigate("/prestamo")}>Préstamo</button>
         <button onClick={() => navigate("/admin/devolucion")}>Devolución</button>
         <button onClick={() => navigate("/admin/lector")}>Lector</button>
         <button onClick={handleLogout}>Cerrar sesión</button>
