@@ -9,7 +9,6 @@ const ReturnPage = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
   const [hasSearched, setHasSearched] = useState(false);
 
   const handleSearch = async () => {
@@ -21,7 +20,6 @@ const ReturnPage = () => {
     try {
       setLoading(true);
       setError(null);
-      setSuccess(null);
       setHasSearched(true);
       const data = await getBookingsByEmail(email.trim());
       setBookings(data);
@@ -48,10 +46,9 @@ const ReturnPage = () => {
     try {
       setLoading(true);
       setError(null);
-      setSuccess(null);
       
       await returnBooking(id);
-      setSuccess("Libro devuelto exitosamente");
+      alert("Libro devuelto exitosamente");
       setBookings((prev) =>
         prev.map((b) =>
           b.id === id ? { ...b, state: false } : b
@@ -69,7 +66,6 @@ const ReturnPage = () => {
     setEmail("");
     setBookings([]);
     setError(null);
-    setSuccess(null);
     setHasSearched(false);
   };
 
@@ -84,7 +80,6 @@ const ReturnPage = () => {
           </p>
         </div>
 
-        {/* Mensajes de estado */}
         {error && (
           <div className="error-message">
             <p>{error}</p>
@@ -94,16 +89,7 @@ const ReturnPage = () => {
           </div>
         )}
 
-        {success && (
-          <div className="success-message">
-            <p>{success}</p>
-            <button onClick={() => setSuccess(null)} className="dismiss-button">
-              Cerrar
-            </button>
-          </div>
-        )}
 
-        {/* Formulario de búsqueda */}
         <div className="search-section">
           <h2 className="section-title">Buscar Préstamos</h2>
           <div className="search-form">
@@ -135,10 +121,8 @@ const ReturnPage = () => {
           </div>
         </div>
 
-        {/* Loading spinner */}
         {loading && <LoadingSpinner />}
 
-        {/* Tabla de préstamos */}
         {bookings.length > 0 && !loading && (
           <div className="bookings-section">
             <h2 className="section-title">Préstamos Encontrados</h2>
@@ -187,7 +171,6 @@ const ReturnPage = () => {
           </div>
         )}
 
-        {/* Mensaje cuando no hay préstamos - solo después de búsqueda */}
         {hasSearched && bookings.length === 0 && !loading && !error && (
           <div className="no-bookings-message">
             <p>No se encontraron préstamos para "{email}"</p>
