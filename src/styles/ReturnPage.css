@@ -1,0 +1,341 @@
+.devolucion-page {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.devolucion-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.devolucion-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.devolucion-title {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.devolucion-subtitle {
+  font-size: 1.0rem;
+  color: #7f8c8d;
+  margin: 0;
+}
+
+
+.search-section,
+.bookings-section {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+/* Formulario de búsqueda */
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.search-input {
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.search-input:disabled {
+  background-color: #f8f9fa;
+  cursor: not-allowed;
+}
+
+.search-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.search-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover:not(:disabled) {
+  background-color: #2980b9;
+}
+
+.search-button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.clear-button {
+  background-color: #95a5a6;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.clear-button:hover:not(:disabled) {
+  background-color: #7f8c8d;
+}
+
+/* Tabla de préstamos */
+.table-container {
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.bookings-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+.bookings-table th {
+  background-color: #2c3e50;
+  color: white;
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bookings-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  vertical-align: middle;
+}
+
+.bookings-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.book-title {
+  font-weight: 400;
+  font-size: 2rem;
+  color: #2c3e50;
+}
+
+.book-author {
+  color: #7f8c8d;
+}
+
+.date-cell {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.status-cell {
+  text-align: center;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-badge.active {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-badge.returned {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.action-cell {
+  text-align: center;
+}
+
+.return-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.return-button.enabled {
+  background-color: #28a745;
+  color: white;
+}
+
+.return-button.enabled:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.return-button.disabled {
+  background-color: #6c757d;
+  color: white;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.return-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Mensajes de estado */
+.error-message {
+  text-align: center;
+  padding: 1.5rem;
+  background-color: #fff5f5;
+  border: 1px solid #fed7d7;
+  border-radius: 8px;
+  color: #c53030;
+  margin-bottom: 2rem;
+}
+
+.success-message {
+  text-align: center;
+  padding: 1.5rem;
+  background-color: #f0fff4;
+  border: 1px solid #9ae6b4;
+  border-radius: 8px;
+  color: #22543d;
+  margin-bottom: 2rem;
+}
+
+.dismiss-button {
+  background-color: transparent;
+  border: 1px solid currentColor;
+  color: inherit;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.dismiss-button:hover {
+  background-color: currentColor;
+  color: white;
+}
+
+.no-bookings-message {
+  text-align: center;
+  padding: 3rem;
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .devolucion-content {
+    padding: 1rem;
+  }
+  
+  .devolucion-title {
+    font-size: 2rem;
+  }
+  
+  .search-section,
+  .bookings-section {
+    padding: 1.5rem;
+  }
+  
+  .search-buttons {
+    flex-direction: column;
+  }
+  
+  .search-button,
+  .clear-button {
+    width: 100%;
+  }
+  
+  .bookings-table {
+    font-size: 0.9rem;
+  }
+  
+  .bookings-table th,
+  .bookings-table td {
+    padding: 0.75rem 0.5rem;
+  }
+  
+  .return-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .devolucion-title {
+    font-size: 1.5rem;
+  }
+  
+  .search-section,
+  .bookings-section {
+    padding: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.3rem;
+  }
+  
+  .bookings-table {
+    font-size: 0.8rem;
+  }
+  
+  .bookings-table th,
+  .bookings-table td {
+    padding: 0.5rem 0.25rem;
+  }
+  
+  .status-badge {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+  }
+  
+  .return-button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+  }
+}

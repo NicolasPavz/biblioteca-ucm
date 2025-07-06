@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { newBook, newCopy, searchBookByTitle } from "../services/bookService";
 import HeaderAdmin from "../components/HeaderAdmin";
+import BookForm from "../components/BookFormComponent";
+import BookCopyForm from "../components/BookCopyFormComponent";
 import "../styles/BookPage.css";
 
 const BookPage = () => {
@@ -14,19 +16,25 @@ const BookPage = () => {
     const [results, setResults] = useState([]);
     const [selectedBook, setSelectedBook] = useState(null);
     const [searchTitle, setSearchTitle] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleSearchBook = async () => {
         try {
+            setLoading(true);
             const data = await searchBookByTitle(searchTitle.trim());
             setResults(Array.isArray(data) ? data : [data]);
         } catch (error) {
             console.error("Error al buscar libros:", error);
             alert("Error al buscar libros");
+        } finally {
+            setLoading(false);
         }
     };
+
     const handleCreateCopy = async () => {
         if (!selectedBook) return;
         try {
+            setLoading(true);
             await newCopy(selectedBook.id);
             alert("Copia creada exitosamente");
             setResults([]);
@@ -35,8 +43,11 @@ const BookPage = () => {
         } catch (error) {
             console.error("Error al crear copia:", error);
             alert("Error al crear copia");
+        } finally {
+            setLoading(false);
         }
     };
+
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
@@ -56,87 +67,58 @@ const BookPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            setLoading(true);
             await newBook(form);
             alert("Libro creado exitosamente");
             setForm({ author: "", title: "", type: "", image64: "" });
         } catch (error) {
             console.error("Error al crear libro:", error);
             setMensaje("Error al crear libro");
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <div className="home-page">
-      <HeaderAdmin />
-      <main className="home-content">
-        <h2>Nuevo Libro</h2>
-        <form onSubmit={handleSubmit} className="form-libro">
-          <input
-            type="text"
-            name="title"
-            placeholder="Título"
-            value={form.title}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="author"
-            placeholder="Autor"
-            value={form.author}
-            onChange={handleChange}
-            required
-          />
-          <select
-            name="type"
-            value={form.type}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Seleccionar tipo</option>
-            <option value="NOVELA">NOVELA</option>
-            <option value="TEXTO">TEXTO</option>
-            <option value="REVISTA">REVISTA</option>
-          </select>
-          <input type="file" accept="image/*" onChange={handleImage} />
-          <button type="submit">Crear libro</button>
-        </form>
+        <div className="book-page">
+            <HeaderAdmin />
+            <main className="book-content">
+                <div className="book-header">
+                    <h1 className="book-title">Gestión de Libros</h1>
+                    <p className="book-subtitle">Crear nuevos libros y copias adicionales</p>
+                </div>
 
-        <hr style={{ margin: "2rem 0" }} />
-        <h2>Crear Copia de Libro Existente</h2>
+                <div className="book-sections">
+                    <div className="book-section">
+                        <h2 className="section-title">Nuevo Libro</h2>
+                        <BookForm
+                            form={form}
+                            loading={loading}
+                            onSubmit={handleSubmit}
+                            onChange={handleChange}
+                            onImageChange={handleImage}
+                        />
+                    </div>
 
-        <div className="form-libro">
-          <input
-            type="text"
-            placeholder="Buscar libro por título..."
-            value={searchTitle}
-            onChange={(e) => setSearchTitle(e.target.value)}
-          />
-          <button onClick={handleSearchBook}>Buscar libro</button>
+                    <div className="section-divider"></div>
 
-          {results.length > 0 && (
-            <div className="search-results">
-              <p>Resultados:</p>
-              <ul>
-                {results.map((book) => (
-                  <li
-                    key={book.id}
-                    className={selectedBook?.id === book.id ? "selected" : ""}
-                    onClick={() => setSelectedBook(book)}
-                  >
-                    <strong>{book.title}</strong> — {book.author} ({book.type})
-                  </li>
-                ))}
-              </ul>
-              <button onClick={handleCreateCopy} disabled={!selectedBook}>
-                Crear copia del libro seleccionado
-              </button>
-            </div>
-          )}
+                    <div className="book-section">
+                        <h2 className="section-title">Crear Copia de Libro Existente</h2>
+                        <BookCopyForm
+                            searchTitle={searchTitle}
+                            setSearchTitle={setSearchTitle}
+                            results={results}
+                            selectedBook={selectedBook}
+                            setSelectedBook={setSelectedBook}
+                            loading={loading}
+                            onSearch={handleSearchBook}
+                            onCreateCopy={handleCreateCopy}
+                        />
+                    </div>
+                </div>
+            </main>
         </div>
-      </main>
-    </div>
-  );
+    );
 };
 
 export default BookPage;

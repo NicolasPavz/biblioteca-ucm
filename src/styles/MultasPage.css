@@ -1,0 +1,152 @@
+.multas-section {
+  margin-top: 2rem;
+}
+
+.fines-container {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.fines-header {
+  background-color: #34495e;
+  color: white;
+  padding: 1.5rem;
+}
+
+.stat-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  min-width: 150px;
+}
+
+.stat-card.pending {
+  background-color: #e74c3c;
+}
+
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+
+.table-container {
+  overflow-x: auto;
+}
+
+.fines-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.fines-table th {
+  background-color: #ecf0f1;
+  color: #2c3e50;
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #bdc3c7;
+}
+
+.fines-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.fines-table tr:hover {
+  background-color: #f8f9fa;
+  transition: background-color 0.2s ease;
+}
+
+.fines-table tr.pending-fine {
+  border-left: 4px solid #e74c3c;
+}
+
+.fines-table tr.paid-fine {
+  border-left: 4px solid #27ae60;
+}
+
+.fine-amount {
+  font-weight: 600;
+}
+
+.amount-value {
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.fine-description {
+  color: #34495e;
+  max-width: 300px;
+  word-wrap: break-word;
+}
+
+.status-badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: transform 0.2s ease;
+}
+
+.status-badge:hover {
+  transform: scale(1.05);
+}
+
+
+.checkmark {
+  background-color: #27ae60;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.no-fines-message {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #7f8c8d;
+}
+
+.no-fines-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.no-fines-message h3 {
+  color: #27ae60;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.no-fines-message p {
+  font-size: 1.1rem;
+  margin: 0;
+  color: #2c3e50;
+}
+
+.stat-card {
+  transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+}

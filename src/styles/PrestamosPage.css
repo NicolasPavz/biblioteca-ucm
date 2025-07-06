@@ -1,0 +1,134 @@
+.prestamos-section {
+  margin-top: 2rem;
+}
+
+.bookings-container {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.bookings-header {
+  background-color: #34495e;
+  color: white;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bookings-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.bookings-stats {
+  display: flex;
+  gap: 1rem;
+}
+
+.stat-item {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.stat-item.active {
+  background-color: #27ae60;
+}
+
+.stat-item.returned {
+  background-color: #95a5a6;
+}
+
+
+.table-container {
+  overflow-x: auto;
+}
+
+.bookings-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.bookings-table th {
+  background-color: #ecf0f1;
+  color: #2c3e50;
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #bdc3c7;
+}
+
+.bookings-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.bookings-table tr:hover {
+  background-color: #f8f9fa;
+  transition: background-color 0.2s ease;
+}
+
+.bookings-table tr.active-booking {
+  border-left: 4px solid #27ae60;
+}
+
+.bookings-table tr.returned-booking {
+  border-left: 4px solid #95a5a6;
+}
+
+.book-title {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.book-type-badge {
+  background-color: #3498db;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status-badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: transform 0.2s ease;
+}
+
+.status-badge:hover {
+  transform: scale(1.05);
+}
+
+.no-bookings-message {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #7f8c8d;
+}
+
+.no-bookings-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.no-bookings-message h3 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.no-bookings-message p {
+  font-size: 1.1rem;
+  margin: 0;
+}

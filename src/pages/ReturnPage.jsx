@@ -1,27 +1,57 @@
 import { useState } from "react";
 import { getBookingsByEmail, returnBooking } from "../services/bookingService";
 import HeaderAdmin from "../components/HeaderAdmin";
+import LoadingSpinner from "../components/LoadingSpinnerComponent";
+import "../styles/ReturnPage.css";
 
-const DevolucionPage = () => {
+const ReturnPage = () => {
   const [email, setEmail] = useState("");
   const [bookings, setBookings] = useState([]);
-  const [mensaje, setMensaje] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [hasSearched, setHasSearched] = useState(false);
 
   const handleSearch = async () => {
+    if (!email.trim()) {
+      setError("Por favor, ingresa el correo del lector");
+      return;
+    }
+
     try {
-      setMensaje("");
+      setLoading(true);
+      setError(null);
+      setSuccess(null);
+      setHasSearched(true);
       const data = await getBookingsByEmail(email.trim());
       setBookings(data);
+      
+      if (data.length === 0) {
+        setError("No se encontraron préstamos para este correo");
+      }
     } catch (err) {
       console.error("Error buscando préstamos:", err);
-      alert("Error al buscar préstamos.");
+      setError("Error al buscar préstamos. Por favor, intenta de nuevo.");
+      setBookings([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
     }
   };
 
   const handleReturn = async (id) => {
     try {
+      setLoading(true);
+      setError(null);
+      setSuccess(null);
+      
       await returnBooking(id);
-      alert("Libro devuelto exitosamente.");
+      setSuccess("Libro devuelto exitosamente");
       setBookings((prev) =>
         prev.map((b) =>
           b.id === id ? { ...b, state: false } : b
@@ -29,77 +59,143 @@ const DevolucionPage = () => {
       );
     } catch (err) {
       console.error("Error al devolver libro:", err);
-      alert("Error al devolver el libro.");
+      setError("Error al devolver el libro. Por favor, intenta de nuevo.");
+    } finally {
+      setLoading(false);
     }
   };
 
-  return (
-    <div className="home-page">
-      <HeaderAdmin />
-      <main className="home-content">
-        <h2>Gestión de Devoluciones</h2>
+  const handleClearForm = () => {
+    setEmail("");
+    setBookings([]);
+    setError(null);
+    setSuccess(null);
+    setHasSearched(false);
+  };
 
-        <div className="form-libro">
-          <input
-            type="email"
-            placeholder="Correo del lector"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <button onClick={handleSearch}>Buscar préstamos</button>
+  return (
+    <div className="devolucion-page">
+      <HeaderAdmin />
+      <main className="devolucion-content">
+        <div className="devolucion-header">
+          <h1 className="devolucion-title">Gestión de Devoluciones</h1>
+          <p className="devolucion-subtitle">
+            Busca préstamos activos y gestiona las devoluciones
+          </p>
         </div>
 
-        {mensaje && <p style={{ color: "green" }}>{mensaje}</p>}
+        {/* Mensajes de estado */}
+        {error && (
+          <div className="error-message">
+            <p>{error}</p>
+            <button onClick={() => setError(null)} className="dismiss-button">
+              Cerrar
+            </button>
+          </div>
+        )}
 
-        {bookings.length > 0 ? (
-          <table className="data-table" style={{ marginTop: "1rem" }}>
-            <thead>
-              <tr>
-                <th>Título</th>
-                <th>Autor</th>
-                <th>Fecha Préstamo</th>
-                <th>Fecha Devolución</th>
-                <th>Estado</th>
-                <th>Acción</th>
-              </tr>
-            </thead>
-            <tbody>
-              {bookings.map((b) => (
-                <tr key={b.id}>
-                  <td>{b.copyBook.book.title}</td>
-                  <td>{b.copyBook.book.author}</td>
-                  <td>{new Date(b.dateBooking).toLocaleDateString()}</td>
-                  <td>{new Date(b.dateReturn).toLocaleDateString()}</td>
-                  <td style={{ color: b.state ? "green" : "gray" }}>
-                    {b.state ? "Activo" : "Devuelto"}
-                  </td>
-                  <td>
-                          <button
-                              onClick={() => handleReturn(b.id)}
-                              disabled={!b.state}
-                              style={{
-                                  backgroundColor: b.state ? "#007bff" : "#ccc",
-                                  color: "#fff",
-                                  padding: "6px 12px",
-                                  border: "none",
-                                  borderRadius: "4px",
-                                  cursor: b.state ? "pointer" : "not-allowed",
-                                  opacity: b.state ? 1 : 0.6
-                              }}
-                          >
-                              Confirmar devolución
-                          </button>
+        {success && (
+          <div className="success-message">
+            <p>{success}</p>
+            <button onClick={() => setSuccess(null)} className="dismiss-button">
+              Cerrar
+            </button>
+          </div>
+        )}
+
+        {/* Formulario de búsqueda */}
+        <div className="search-section">
+          <h2 className="section-title">Buscar Préstamos</h2>
+          <div className="search-form">
+            <input
+              type="email"
+              placeholder="Correo electrónico del lector"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyPress={handleKeyPress}
+              className="search-input"
+              disabled={loading}
+            />
+            <div className="search-buttons">
+              <button 
+                onClick={handleSearch}
+                className="search-button"
+                disabled={loading}
+              >
+                {loading ? "Buscando..." : "Buscar préstamos"}
+              </button>
+              <button 
+                onClick={handleClearForm}
+                className="clear-button"
+                disabled={loading}
+              >
+                Limpiar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Loading spinner */}
+        {loading && <LoadingSpinner />}
+
+        {/* Tabla de préstamos */}
+        {bookings.length > 0 && !loading && (
+          <div className="bookings-section">
+            <h2 className="section-title">Préstamos Encontrados</h2>
+            <div className="table-container">
+              <table className="bookings-table">
+                <thead>
+                  <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Fecha Préstamo</th>
+                    <th>Fecha Devolución</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {bookings.map((booking) => (
+                    <tr key={booking.id}>
+                      <td className="book-title">{booking.copyBook.book.title}</td>
+                      <td className="book-author">{booking.copyBook.book.author}</td>
+                      <td className="date-cell">
+                        {new Date(booking.dateBooking).toLocaleDateString()}
                       </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <p>No se encontraron préstamos.</p>
+                      <td className="date-cell">
+                        {new Date(booking.dateReturn).toLocaleDateString()}
+                      </td>
+                      <td className="status-cell">
+                        <span className={`status-badge ${booking.state ? 'active' : 'returned'}`}>
+                          {booking.state ? "Activo" : "Devuelto"}
+                        </span>
+                      </td>
+                      <td className="action-cell">
+                        <button
+                          onClick={() => handleReturn(booking.id)}
+                          disabled={!booking.state || loading}
+                          className={`return-button ${booking.state ? 'enabled' : 'disabled'}`}
+                        >
+                          {booking.state ? "Confirmar devolución" : "Ya devuelto"}
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Mensaje cuando no hay préstamos - solo después de búsqueda */}
+        {hasSearched && bookings.length === 0 && !loading && !error && (
+          <div className="no-bookings-message">
+            <p>No se encontraron préstamos para "{email}"</p>
+          </div>
         )}
       </main>
     </div>
   );
 };
 
-export default DevolucionPage;
+export default ReturnPage;
