@@ -9,7 +9,7 @@ const Header = () => {
       <div className="logo">Biblioteca UCM</div>
       <nav className="nav-buttons">
         <button onClick={() => navigate("/")}>Home</button>
-        <button onClick={() => alert("aaaa")}>
+        <button onClick={() => alert("Integrantes: NIcolass Miguel Pavez Molina")}>
           About
         </button>
         <button onClick={() => navigate("/auth/login")}>Login</button>
