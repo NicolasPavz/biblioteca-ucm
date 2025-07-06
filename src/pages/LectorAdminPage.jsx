@@ -10,7 +10,7 @@ const LectorAdminPage = () => {
   const [lector, setLector] = useState(null);
   const [prestamos, setPrestamos] = useState([]);
   const [multas, setMultas] = useState([]);
-  const [seccion, setSeccion] = useState("datos"); // 'datos' | 'prestamos' | 'multas'
+  const [seccion, setSeccion] = useState("datos");
   const [mensaje, setMensaje] = useState("");
   
 

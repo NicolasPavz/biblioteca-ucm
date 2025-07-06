@@ -93,7 +93,6 @@ const PrestamoAdminPage = () => {
           </p>
         </div>
 
-        {/* Mensajes de estado */}
         {error && (
           <div className="error-message">
             <p>{error}</p>
@@ -104,8 +103,6 @@ const PrestamoAdminPage = () => {
         )}
 
       
-
-        {/* Formulario de búsqueda */}
         <div className="search-section">
           <h2 className="section-title">Buscar Libro</h2>
           <div className="search-form">
@@ -137,7 +134,6 @@ const PrestamoAdminPage = () => {
           </div>
         </div>
 
-        {/* Resultados de búsqueda */}
         {loading && <LoadingSpinner />}
 
         {copies.length > 0 && !loading && (
@@ -167,7 +163,6 @@ const PrestamoAdminPage = () => {
           </div>
         )}
 
-        {/* Formulario de préstamo */}
         {selectedCopy && (
           <div className="booking-section">
             <h2 className="section-title">Crear Préstamo</h2>
