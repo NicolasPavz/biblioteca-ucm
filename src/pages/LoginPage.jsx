@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/authService";
 import { jwtDecode } from "jwt-decode";
-import Header from "../components/header";
+import Header from "../components/Header";
+import LoginForm from "../components/LoginFormComponent";
 import "../styles/LoginPage.css";
 
 const LoginPage = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) =>
@@ -16,6 +18,7 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
     try {
       const res = await login(form);
@@ -39,45 +42,37 @@ const LoginPage = () => {
     } catch (err) {
       console.error(err);
       setError("Email o contraseña inválidos");
+    } finally {
+      setLoading(false);
     }
   };
 
+  const handleRegisterClick = () => {
+    navigate("/auth/register");
+  };
+
   return (
-    <div>
+    <div className="login-page">
       <Header />
-      <div className="login-wrapper">
-        <div className="login-container">
-          <h2>Iniciar sesión</h2>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="email"
-              name="email"
-              placeholder="Correo"
-              value={form.email}
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Contraseña"
-              value={form.password}
-              onChange={handleChange}
-              required
-            />
-            <button type="submit">Ingresar</button>
-          </form>
-
-          <button
-            className="register-button"
-            onClick={() => navigate("/auth/register")}
-          >
-            ¿No tienes cuenta? Regístrate
-          </button>
-
-          {error && <p className="login-error">{error}</p>}
+      <main className="login-content">
+        <div className="login-header">
+          <h1 className="login-title">Iniciar Sesión</h1>
+          <p className="login-subtitle">Accede a tu cuenta de la Biblioteca UCM</p>
         </div>
-      </div>
+
+        <div className="login-wrapper">
+          <div className="login-container">
+            <LoginForm
+              form={form}
+              loading={loading}
+              error={error}
+              onSubmit={handleSubmit}
+              onChange={handleChange}
+              onRegisterClick={handleRegisterClick}
+            />
+          </div>
+        </div>
+      </main>
     </div>
   );
 };
