@@ -94,16 +94,3 @@
     cursor: not-allowed;
     transform: none;
 }
-
-/* Responsive Design */
-@media (max-width: 480px) {
-    .form-input,
-    .form-select,
-    .form-file {
-        padding: 0.6rem 0.8rem;
-    }
-    
-    .create-button {
-        padding: 0.6rem 0.8rem;
-    }
-}

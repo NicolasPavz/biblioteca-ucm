@@ -52,32 +52,3 @@
     background: linear-gradient(to right, transparent, #e2e8f0, transparent);
     margin: 1rem 0;
 }
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .book-content {
-        padding: 1rem;
-    }
-    
-    .book-title {
-        font-size: 2rem;
-    }
-    
-    .book-section {
-        padding: 1.5rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .book-title {
-        font-size: 1.5rem;
-    }
-    
-    .book-section {
-        padding: 1rem;
-    }
-    
-    .section-title {
-        font-size: 1.3rem;
-    }
-}
