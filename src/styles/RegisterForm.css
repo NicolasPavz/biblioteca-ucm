@@ -133,3 +133,19 @@
   margin: 0;
   font-size: 0.9rem;
 }
+
+.register-form {
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.form-group {
+  min-width: 0;
+}
+
+.form-input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}

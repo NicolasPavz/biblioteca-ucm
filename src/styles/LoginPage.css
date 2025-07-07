@@ -6,7 +6,7 @@
 .login-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,6 +33,8 @@
 .login-wrapper {
   width: 100%;
   max-width: 400px;
+  box-sizing: border-box;
+  padding: 0 1rem; 
 }
 
 .login-container {
@@ -41,4 +43,18 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 2rem;
   margin: 0 auto;
+  box-sizing: border-box;
+  width: 100%; 
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"],
+.login-container input[type="email"] {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
 }

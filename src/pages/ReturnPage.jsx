@@ -89,7 +89,6 @@ const ReturnPage = () => {
           </div>
         )}
 
-
         <div className="search-section">
           <h2 className="section-title">Buscar Préstamos</h2>
           <div className="search-form">
@@ -131,7 +130,6 @@ const ReturnPage = () => {
                 <thead>
                   <tr>
                     <th>Título</th>
-                    <th>Autor</th>
                     <th>Fecha Préstamo</th>
                     <th>Fecha Devolución</th>
                     <th>Estado</th>
@@ -141,8 +139,11 @@ const ReturnPage = () => {
                 <tbody>
                   {bookings.map((booking) => (
                     <tr key={booking.id}>
-                      <td className="book-title">{booking.copyBook.book.title}</td>
-                      <td className="book-author">{booking.copyBook.book.author}</td>
+                      <td className="book-title">
+                        <div>{booking.copyBook.book.title}</div>
+                        <div className="book-author">{booking.copyBook.book.author}</div>
+                      </td>
+
                       <td className="date-cell">
                         {new Date(booking.dateBooking).toLocaleDateString()}
                       </td>
